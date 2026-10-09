@@ -1,0 +1,14 @@
+plugins {
+    id 'groovy-gradle-plugin'
+}
+
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
+}
+
+dependencies {
+    // Make Spring Boot and Spring Dependency Management plugins available to convention plugins
+    implementation 'org.springframework.boot:org.springframework.boot.gradle.plugin:4.1.1'
+    implementation 'io.spring.dependency-management:io.spring.dependency-management.gradle.plugin:1.1.7'
+}

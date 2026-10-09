@@ -1,0 +1,14 @@
+// Convention plugin: for all Spring library modules (adapters, application, etc.).
+// Applies java-conventions and Spring dependency management (BOM) without applying
+// the Spring Boot plugin itself (no bootJar, no fat-jar).
+plugins {
+    id 'transaction.java-conventions'
+    id 'io.spring.dependency-management'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.boot:spring-boot-dependencies:4.1.1'
+        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:2025.1.3'
+    }
+}

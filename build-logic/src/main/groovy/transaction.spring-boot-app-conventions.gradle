@@ -1,0 +1,7 @@
+// Convention plugin: for the Spring Boot application module (bootstrap).
+// Applies spring-library-conventions AND the Spring Boot plugin that produces
+// the executable fat-jar via bootJar.
+plugins {
+    id 'transaction.spring-library-conventions'
+    id 'org.springframework.boot'
+}

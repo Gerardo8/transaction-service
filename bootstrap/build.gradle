@@ -1,0 +1,32 @@
+// Bootstrap module: wires all adapters together into a runnable Spring Boot application.
+// This is the ONLY module that produces an executable fat-jar (bootJar).
+// Spring MVC is a transitive dependency from the REST adapter.
+plugins {
+    id 'transaction.spring-boot-app-conventions'
+}
+
+dependencies {
+    // Wire all adapter subprojects
+    implementation project(':application')
+    implementation project(':infrastructure:spring-mvc-rest-adapter')
+    implementation project(':infrastructure:postgres-jdbc-adapter')
+    implementation project(':infrastructure:restclient-adapter')
+    implementation project(':infrastructure:event-publisher-adapter')
+
+    // Spring Boot provides SpringApplication and @SpringBootApplication at compile time.
+    // Adapter dependencies use `implementation` (not `api`), so they are NOT transitively available
+    // here at compile time — only at runtime. Bootstrap needs this minimal starter directly.
+    implementation 'org.springframework.boot:spring-boot-starter'
+
+    developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+
+    testImplementation project(':domain')
+    testImplementation project(':application')
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+    testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+    testImplementation 'org.testcontainers:testcontainers-junit-jupiter'
+    testImplementation 'org.testcontainers:testcontainers-postgresql'
+    testImplementation 'com.tngtech.archunit:archunit-junit5:1.4.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}

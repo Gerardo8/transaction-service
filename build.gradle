@@ -1,0 +1,24 @@
+// Root build file — only declares plugins used by subprojects (apply false).
+// All shared build logic lives in build-logic convention plugins.
+plugins {
+    id 'org.springframework.boot' version '4.1.1' apply false
+    id 'io.spring.dependency-management' version '1.1.7' apply false
+}
+
+tasks.register('exportOpenApiYaml', Exec) {
+    group = 'documentation'
+    description = 'Downloads the running service OpenAPI document in YAML format.'
+
+    def outputFile = layout.buildDirectory.file('openapi/transaction-service.yaml')
+    commandLine 'curl',
+            '--fail',
+            '--silent',
+            '--show-error',
+            providers.gradleProperty('openApiUrl').getOrElse('http://localhost:8080/v3/api-docs.yaml'),
+            '--output',
+            outputFile.get().asFile.absolutePath
+
+    doFirst {
+        outputFile.get().asFile.parentFile.mkdirs()
+    }
+}

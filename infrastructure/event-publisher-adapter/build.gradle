@@ -1,0 +1,17 @@
+// Outbound event-publisher adapter.
+// Publishes domain events via Spring's ApplicationEventPublisher today;
+// a Kafka/SNS implementation can replace this module without touching the domain.
+plugins {
+    id 'transaction.spring-library-conventions'
+}
+
+dependencies {
+    implementation project(':application')
+    implementation project(':domain')
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.mockito:mockito-junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}

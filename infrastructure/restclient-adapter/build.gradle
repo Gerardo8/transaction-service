@@ -1,0 +1,17 @@
+// Outbound RestClient adapter for calling external HTTP providers.
+// Includes Resilience4j circuit breaker for fault tolerance.
+plugins {
+    id 'transaction.spring-library-conventions'
+}
+
+dependencies {
+    implementation project(':application')
+    implementation project(':domain')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'io.github.resilience4j:resilience4j-circuitbreaker'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation testFixtures(project(':domain'))
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}

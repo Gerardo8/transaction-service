@@ -1,0 +1,22 @@
+// Convention plugin: base for ALL Java modules in this project.
+// Configures the Java toolchain and JUnit 5 test runner.
+plugins {
+    id 'java'
+}
+
+group = 'com.spin'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}

@@ -1,0 +1,13 @@
+pluginManagement {
+    includeBuild 'build-logic'
+}
+
+rootProject.name = 'transaction-service'
+
+include 'domain'
+include 'application'
+include 'bootstrap'
+include 'infrastructure:spring-mvc-rest-adapter'
+include 'infrastructure:postgres-jdbc-adapter'
+include 'infrastructure:restclient-adapter'
+include 'infrastructure:event-publisher-adapter'

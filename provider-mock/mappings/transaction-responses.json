@@ -1,0 +1,49 @@
+{
+  "mappings": [
+    {
+      "priority": 1,
+      "request": {
+        "method": "POST",
+        "urlPath": "/provider/v1/execute",
+        "bodyPatterns": [
+          {
+            "matchesJsonPath": {
+              "expression": "$.accountId",
+              "equalTo": "acc-insufficient-funds"
+            }
+          }
+        ]
+      },
+      "response": {
+        "status": 422,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "status": "REJECTED",
+          "code": "INSUFFICIENT_FUNDS",
+          "message": "The account does not have enough balance to complete the transaction"
+        }
+      }
+    },
+    {
+      "priority": 10,
+      "request": {
+        "method": "POST",
+        "urlPath": "/provider/v1/execute"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "transactionId": "txn-mock-001",
+          "status": "APPROVED",
+          "balance": 5500.00,
+          "executedAt": "2025-03-15T10:30:00Z"
+        }
+      }
+    }
+  ]
+}

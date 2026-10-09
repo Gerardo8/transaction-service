@@ -1,0 +1,18 @@
+// Inbound REST adapter using Spring MVC.
+// Handles HTTP request/response mapping and validation only.
+plugins {
+    id 'transaction.spring-library-conventions'
+}
+
+dependencies {
+    implementation project(':application')
+    implementation project(':domain')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.2'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+    testImplementation testFixtures(project(':domain'))
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}

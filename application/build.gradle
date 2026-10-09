@@ -1,0 +1,18 @@
+// Application module: JDK-only use-case orchestration over domain types, using JDK virtual threads.
+plugins {
+    id 'transaction.java-conventions'
+    id 'java-test-fixtures'
+}
+
+dependencies {
+    implementation project(':domain')
+
+    testImplementation platform('org.springframework.boot:spring-boot-dependencies:4.1.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.mockito:mockito-junit-jupiter'
+    testImplementation testFixtures(project(':domain'))
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    testFixturesImplementation platform('org.springframework.boot:spring-boot-dependencies:4.1.1')
+    testFixturesImplementation 'org.junit.jupiter:junit-jupiter-api'
+}
